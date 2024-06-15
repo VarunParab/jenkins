@@ -96,10 +96,6 @@ sudo usermod -a -G docker $USER
 
 ```
 
-# Admin password Jenkins
-
-`sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
-
 # Payload URL format in github repo webhook
 
 `http://<public-ipv4 address>:8080/github-webhook/` #replace it with ur own public-ipv4 address
