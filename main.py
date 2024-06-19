@@ -1,11 +1,14 @@
 from fastapi import FastAPI
+import os
 from pydantic import BaseModel
 import uvicorn
 import numpy as np
 import pandas as pd 
 from fastapi.middleware.cors import CORSMiddleware
 from prediction_model.predict import generate_predictions 
+from prometheus_fastapi_instrumentator import Instrumentator
 
+port = int(os.environ.get("PORT", 8005))
 app = FastAPI(
     title="Loan Prediction App using API - CI CD Jenkins",
     description = "A Simple CI CD Demo",
@@ -81,4 +84,6 @@ def predict_gui(Gender: str,
     return {"status":pred}
 
 if __name__== "__main__":
-    uvicorn.run(app, host="0.0.0.0",port=8005)
+    uvicorn.run("main:app", host="0.0.0.0",port=port,reload=False)
+
+Instrumentator().instrument(app).expose(app)
